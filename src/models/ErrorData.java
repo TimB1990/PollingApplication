@@ -2,9 +2,9 @@ package models;
 
 public class ErrorData{
 
-    int status;
-    String statusText;
-    String message;
+    public int status;
+    public String statusText;
+    public String message;
 
     public ErrorData(int status, String statusText, String message){
         this.status = status;

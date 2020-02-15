@@ -1,8 +1,8 @@
 package models;
 
 public class Answer {
-    
-    String aid;
+	
+	String aid;
     String value;
     int avotes;
 
@@ -28,5 +28,6 @@ public class Answer {
 
     public void setAvotes(int avotes) {
         this.avotes = avotes;
-    } 
+    }
+
 }

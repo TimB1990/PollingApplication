@@ -1,4 +1,5 @@
 package models;
+
 public class VotePrivileges {
     int qid;
     Boolean showVotes;
