@@ -1,90 +1,183 @@
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Polling startup</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Template!</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
-<div class="container-fluid pt-3">
-
-<p><a href="/PollingApplication/poll" class="btn btn-outline-primary" role="button">get Poll</a></p>
-
-<c:if test="${not empty Error}">
-	<div class="alert alert-danger">
-		<strong>error: </strong>
-		<span>${Error.status}, ${Error.statusText}, ${Error.message}</span>
-	</div>
-</c:if>
-
-<c:if test="${not empty ConfirmMsg}">
-	<div class="alert alert-success">
-		<strong>confirmation: </strong> 
-		<span>${ConfirmMsg.status}, ${ConfirmMsg.statusText}, ${ConfirmMsg.message}</span><br>
-		<span>Welcome <strong>${User}</strong>, your login was successfull. If you want to the see the questions you already voted on and their details,
-        go to your <a href="#">My Votings</a> dashboard!</span>
-	</div>
-</c:if>
-
-<c:if test="${not empty PollData}">
-	<div>
-		<h3>${PollData.description}</h3>
-		<form method="POST" action="/PollingApplication/vote">
-			<c:forEach items="${PollData.answerList}" var="answer">
-				<c:if test="${PollData.showVotes eq false}">
-				<div class="custom-control custom-radio">
-					<input type="radio" class="custom-control-input" id="${answer.aid}" name="aid" value="${answer.aid}" required/>
-					<label class="custom-control-label" for="${answer.aid}">${answer.value}</label>
+	<section class="section">
+		<div class="tile is-ancestor">
+			<div class="tile is-6 is-vertical is-parent">
+				<div class="tile is-child">
+					<div class="notification is-danger">
+						<em>Invalid credentials provided!!</em>
+					</div>
+					<div class="notification is-success">
+						<p>
+							<em> Welcome {user} you have been successfully logged in.
+								If you want to see the questions you voted on, click <a>here</a>
+								to open your dashboard.
+							</em>
+						</p>
+					</div>
 				</div>
-				</c:if>
-				<c:if test="${PollData.showVotes eq true}">
-				<span>${answer.value}:</span>
-				<c:set var="barwidth" value="${(answer.avotes / PollData.qvotes)*100}"/>
-				<div class="progress" style="height:15px;">
-					<div class="progress-bar" style="width:${barwidth}%;height:15px;background-color:lightblue">${barwidth}</div>
+				<div class="tile is-child box">
+					<code>${PollData.showVotes eq false and not empty loggedin}</code>
+					<form>
+						<p class="title">What is your favorite color?</p>
+						<div class="control">
+							<label class="radio">
+								<input type="radio" name="answer">
+								<span class="subtitle is-6"> Red</span>
+							</label><br>
+							<label class="radio">
+								<input type="radio" name="answer" />
+								<span class="subtitle is-6"> Green</span>
+							</label><br>
+							<label class="radio">
+								<input type="radio" name="answer" />
+								<span class="subtitle is-6"> Blue</span>
+							</label><br>
+							<label class="radio">
+								<input type="radio" name="answer" />
+								<span class="subtitle is-6"> Purple</span>
+							</label>
+						</div><br>
+						<div class="field">
+							<button type="submit" class="button is-link">Vote</button>
+						</div>
+					</form>
 				</div>
-				</c:if>
-			</c:forEach>
-			<br>
-			
-			<!-- if login is required disable vote -->
-			<c:choose>
-			<c:when test="${PollData.loginRequiredToVote eq true}">
-				<c:set var="disabled" value="disabled"/>
-			</c:when>'
-			<c:otherwise>
-				<c:set var="disabled" value=""/>
-			</c:otherwise>
-			</c:choose>
-			<button type="submit" class="btn btn-primary ${disabled}">vote</button>
-		</form>
-		
-		<!-- show login form if login is required -->
-		<c:if test="${PollData.loginRequiredToVote eq true}">
-			<form method="POST" action="/PollingApplication/login">
-			<p>please login to continue</p>
-			<div class="row">
-				<div class="col">
-					<input type="text" class="form-control" id="uname" placeholder="Enter uname" name="uname">
+				<div class="tile is-child box">
+					<code>${ PollData.showVotes eq false 
+						and PollData.loginRequiredToVote eq true 
+						and not empty loggedin }
+					</code>
+					<form>
+						<p class="title">What is your favorite color?</p>
+						<div class="control">
+							<label class="radio">
+								<input type="radio" name="answer">
+								<span class="subtitle is-6"> Red</span>
+							</label><br>
+							<label class="radio">
+								<input type="radio" name="answer" />
+								<span class="subtitle is-6"> Green</span>
+							</label><br>
+							<label class="radio">
+								<input type="radio" name="answer" />
+								<span class="subtitle is-6"> Blue</span>
+							</label><br>
+							<label class="radio">
+								<input type="radio" name="answer" />
+								<span class="subtitle is-6"> Purple</span>
+							</label>
+						</div><br>
+						<div class="field">
+							<button type="submit" class="button is-static">Vote</button>
+						</div>
+					</form>
+					<br>
+					<div class="notification box">
+						<em>
+							Your login session has been expired, if you want to
+							continue voting please <a>login</a> again.
+						</em>
+					</div>
 				</div>
-				<div class="col">
-					<input type="password" class="form-control" placeholder="Enter password" name="pass">
+				<div class="tile is-child box">
+					<code>${PollData.showVotes eq true and empty loggedin}</code>
+					<p class="title">What is your favorite color?</p>
+					<div class="box">
+						<span class="subtitle is-6">Red:</span>
+						<progress class="progress is-medium" value="25" max="100">15%</progress>
+						<span class="subtitle is-6">Green: </span>
+						<progress class="progress is-medium" value="25" max="100">30%</progress>
+						<span class="subtitle is-6">Blue: </span>
+						<progress class="progress is-medium" value="25" max="100">30%</progress>
+						<span class="subtitle is-6">Purple: </span>
+						<progress class="progress is-medium" value="25" max="100">30%</progress>
+					</div>
+					<div class="notification box">
+						<em>
+							This IP-address has already voted anonymous at
+							this question. If you want to continue voting, please 
+							<a>login </a> or <a>register</a> as new user.
+						</em>
+					</div>
+
 				</div>
-				<div class="col">
-					<button class="btn btn-primary" type="submit">login</button>
+				<div class="tile is-child box">
+					<p class="title">Login</p>
+					<form>
+						<div class="field">
+							<label class="label">username</label>
+							<div class="control has-icons-left">
+								<input class="input" type="text" placeholder="username" required />
+								<span class="icon is-small is-left">
+									<i class="fas fa-user"></i>
+								</span>
+							</div>
+							<p class="help is-danger">on_error_message</p>
+						</div>
+						<div class="field">
+							<label class="label">password</label>
+							<div class="control has-icons-left">
+								<input class="input" type="password" placeholder="password" required />
+								<span class="icon is-small is-left">
+									<i class="fas fa-key" arie-hidden="true"></i>
+								</span>
+							</div>
+							<p class="help is-danger">on_error_message</p>
+						</div>
+						<div class="field">
+							<button type="submit" class="button is-link">login as user</button>
+						</div>
+					</form>
+				</div>
+				<div class="tile is-child box">
+					<p class="title">Register</p>
+					<form>
+						<div class="field">
+							<label class="label">Username:</label>
+							<div class="control has-icons-left">
+								<input class="input" type="text" placeholder="username" required />
+								<span class="icon is-small is-left">
+									<i class="fas fa-user"></i>
+								</span>
+							</div>
+							<p class="help is-danger">on_error_message</p>
+						</div>
+						<div class="field">
+							<label class="label">Password:</label>
+							<div class="control has-icons-left">
+								<input class="input" type="password" placeholder="password" required />
+								<span class="icon is-small is-left">
+									<i class="fas fa-key" arie-hidden="true"></i>
+								</span>
+							</div>
+						</div>
+						<div class="field">
+							<label class="label">Repeat Password:</label>
+							<div class="control has-icons-left">
+								<input class="input" type="password" placeholder="password" required />
+								<span class="icon is-small is-left">
+									<i class="fas fa-key" arie-hidden="true"></i>
+								</span>
+							</div>
+							<p class="help is-danger">on_error_message</p>
+						</div>
+						<div class="field">
+							<button type="submit" class="button is-link">Register New User</button>
+						</div>
+					</form>
 				</div>
 			</div>
-			
-			</form>
-		</c:if>
-	</div>
-</c:if>
-</div>
+		</div>
+	</section>
 </body>
 </html>

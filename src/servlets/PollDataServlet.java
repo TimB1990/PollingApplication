@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import models.PollData;
 import testdata.TestIpClass;
 import models.ErrorData;
@@ -24,12 +23,14 @@ public class PollDataServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		// login is not possible because the test ip stays, while in the procedure it is changed when user logs in on a account	
 		PollData data = new PollData();
 		try {
 			
 			data = AppController.getPollDataOnCheck(TestIpClass.TEST_IP);
+			
+			request.getSession(false).setAttribute("votedAnonymous", data.showVotes); // referenced in votedServlet line: 40
+			
 			request.setAttribute("PollData", data);
 			
 		}catch(SQLException e) {

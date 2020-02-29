@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 
-import org.apache.commons.codec.digest.DigestUtils;
+// import org.apache.commons.codec.digest.DigestUtils;
 
 import io.jsonwebtoken.*;
 
@@ -16,9 +16,6 @@ public class JWToken {
 		
 	// equavent to issuer = username, subject = password
 	public static String issueJWT(String key, String issuer, String subject, long ttlMillis) {
-		
-		String providedIssuer = new DigestUtils("SHA3_256").digestAsHex(issuer);
-		String providedSubject = new DigestUtils("SHA3_256").digestAsHex(subject);
 		
 		// The JWT signature algorithm to be used to sign the token
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -34,8 +31,8 @@ public class JWToken {
 		// set JWT payload, claims
 		JwtBuilder builder = Jwts.builder()
 				.setIssuedAt(now)
-				.setSubject(providedSubject)
-				.setIssuer(providedIssuer)
+				.setSubject(issuer)
+				.setIssuer(subject)
 				.signWith(signatureAlgorithm, signingKey);
 		
 		// if specified, add expiration
@@ -54,10 +51,10 @@ public class JWToken {
 	public static boolean validateJWT(HttpServletRequest req, String key) {
 		
 		// get authorization header
-		String authHeader = req.getHeader("authorization");
+		String authHeader = req.getHeader("Authorization");
 		
 		// check if authentication header is null or does not start with Bearer
-		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+		if (authHeader == null || !authHeader.startsWith("bearer ")) {
 			System.out.println("No token provided!");
 			return false;
 		}
