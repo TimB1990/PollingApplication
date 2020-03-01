@@ -80,6 +80,15 @@ public class AppController {
         
     }
     
+    public static void LogoutUser(String ip) throws SQLException {
+    	Connection con = DBCPDataSource.getConnection();
+        CallableStatement cStmt = con.prepareCall("{call logoutUser(?}");
+        cStmt.setString(1, ip);
+        cStmt.executeUpdate();
+        con.close();
+    	
+    }
+    
     public static Boolean addAnonVote(String ip, int qid, String aid) throws SQLException {
     	
     	Boolean voteAccepted = false;

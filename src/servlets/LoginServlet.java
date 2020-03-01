@@ -27,7 +27,9 @@ public class LoginServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// no doGet logic
+		String content = "poll";
+		request.setAttribute("Content", content);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +40,6 @@ public class LoginServlet extends HttpServlet {
 		String ip = TestIpClass.TEST_IP;
 		String uname = request.getParameter("uname");
 		String pass = request.getParameter("pass");
-		
 		
 		try {
 			
@@ -62,8 +63,7 @@ public class LoginServlet extends HttpServlet {
 				// put confirmation as request attribute
 				request.setAttribute("ConfirmMsg", confirmation);
 				
-				// dispatch request to index.jsp
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				// response.sendRedirect("/");
 				
 			}
 			else {
@@ -74,8 +74,8 @@ public class LoginServlet extends HttpServlet {
 				// put error as request attribute
 				request.setAttribute("Error", error);
 				
-				// dispatch request to index.jsp
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				session.setAttribute("loggedin", false);
+						
 			}
 			
 		}
@@ -87,9 +87,13 @@ public class LoginServlet extends HttpServlet {
 			// put error as request attribute
 			request.setAttribute("Error", error);
 			
-			// dispatch request to index.jsp
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			session.setAttribute("loggedin", false);
+				
 		}
 		
+		
+		// dispatch request to index.jsp
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+			
 	}
 }

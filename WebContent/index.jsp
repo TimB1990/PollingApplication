@@ -27,28 +27,10 @@
 	<section class="section">
 		<div class="tile is-ancestor">
 			<div class="tile is-6 is-vertical is-parent">
-				<div class="tile is-child">
-
-					<c:if test="${ not empty ConfirmMsg }">
-						<div class="notification is-success">
-							<p>
-								<strong>confirmation: </strong> <span>${ConfirmMsg.status},
-									${ConfirmMsg.statusText}, ${ConfirmMsg.message}</span>
-							</p>
-						</div>
-					</c:if>
-				</div>
-
-				<c:if test="${ not empty Error }">
-					<div class="notification is-danger">
-						<strong>error: </strong> <span>${Error.status},
-							${Error.statusText}, ${Error.message}</span>
-					</div>
-				</c:if>
 
 				<!-- if user has not registered or voted anonymous -->
 				<c:if
-					test="${PollData.showVotes eq false and PollData.loginRequiredToVote eq false }"
+					test="${PollData.showVotes eq false and PollData.loginRequiredToVote eq false and empty loggedin or loggedin eq true }"
 				>
 					<div class="tile is-child box">
 						<form>
@@ -73,20 +55,12 @@
 								>Vote</button>
 							</div>
 						</form>
-						<div class="notification">
-							<em>You are about to cast an anonymous vote, please note
-								that this is the only anonymous vote allowed from this device.
-								If you want to vote on more questions, please <a
-								class="login-link"
-							>login</a> or <a class="register-link">register</a>
-							</em>
-						</div>
 					</div>
 				</c:if>
 
 				<!--  disable voting  -->
 				<c:if
-					test="${ PollData.loginRequiredToVote eq true and PollData.loginRequiredToVote eq true }"
+					test="${ PollData.showVotes eq false and PollData.loginRequiredToVote eq true and loggedin eq false}"
 				>
 					<div class="tile is-child box">
 						<form>
@@ -121,7 +95,7 @@
 				</c:if>
 
 				<!-- show votes -->
-				<c:if test="${PollData.showVotes eq true and empty loggedin}">
+				<c:if test="${PollData.showVotes eq true }">
 					<div class="tile is-child box">
 						<p class="title">${PollData.description}</p>
 						<div class="box">
@@ -168,6 +142,7 @@
 							<i class="fas fa-times"></i>
 						</button>
 						<form
+							id="login-form"
 							method="post"
 							action="./login"
 						>
@@ -204,15 +179,11 @@
 							</div>
 							<div class="field">
 								<button
-									type="submit"
+									type="button"
 									class="button is-link"
+									onclick="submit()"
 								>login as user</button>
 							</div>
-
-							<c:if test="${ not empty Error }">
-								<p class="help is-danger">${ Error.message }</p>
-							</c:if>
-
 						</form>
 					</div>
 				</div>
@@ -291,7 +262,34 @@
 				</div>
 			</div>
 		</div>
+		<p>loggedin: ${ sessionScope.loggedin }</p>
+
+		<c:if test="${ not empty ConfirmMsg }">
+			<div class="notification is-success">
+				<p>
+					<strong>confirmation: </strong> <span>${ConfirmMsg.status},
+						${ConfirmMsg.statusText}, ${ConfirmMsg.message}</span>
+				</p>
+			</div>
+		</c:if>
+
+		<c:if test="${ not empty Error }">
+			<p style="color: red;">${ Error.message }</p>
+		</c:if>
+
+		<c:choose>
+			<c:when test="${ loggedin eq true }">
+				<a href="./logout">logout</a>
+			</c:when>
+			<c:otherwise>
+				<a class="login-link">login</a>
+		or <a class="register-link">register</a>
+
+			</c:otherwise>
+		</c:choose>
+
 	</section>
 	<script src="modals.js"></script>
+	<script src="login.js"></script>
 </body>
 </html>

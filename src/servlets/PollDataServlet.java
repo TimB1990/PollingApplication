@@ -8,12 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import models.PollData;
 import testdata.TestIpClass;
 import models.ErrorData;
 import controllers.AppController;
 
-@WebServlet(name = "/poll", urlPatterns = { "/poll" })
+@WebServlet(name = "polldata", urlPatterns = { "" })
 public class PollDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,13 +31,16 @@ public class PollDataServlet extends HttpServlet {
 			
 			data = AppController.getPollDataOnCheck(TestIpClass.TEST_IP);
 			
-			request.getSession().setAttribute("votedAnonymous", data.showVotes); // referenced in votedServlet line: 40
-			request.setAttribute("PollData", data);		
+			HttpSession session = request.getSession();
+			session.setAttribute("PollData", data);
+			
 		}catch(SQLException e) {
 			ErrorData error = new ErrorData(500,"internal server error","message: " + e);
 			request.setAttribute("Error", error);
 		}
 		
+
+		// forward to index.jsp
 		request.getRequestDispatcher("/index.jsp").forward(request,response);
 		
 		
