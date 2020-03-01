@@ -45,11 +45,10 @@ public class LoginServlet extends HttpServlet {
 			// check if login is valid, returns boolean
 			Boolean valid = AppController.loginUser(ip, uname, pass);
 			
-			// if valid issue new token
-			String token = JWToken.issueJWT(ip, uname, pass, 1000 * 60 * 10);
-			
-			
 			if(valid) {
+				
+				// if valid issue new token -> key, issuer, subject, ttlMillis
+				String token = JWToken.issueJWT(ip, uname, pass, 1000 * 60 * 10);
 				
 				// put token inside authentication header of response
 				response.setHeader("Authorization", "bearer " + token);

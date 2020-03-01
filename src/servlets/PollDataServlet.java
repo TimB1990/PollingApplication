@@ -29,16 +29,16 @@ public class PollDataServlet extends HttpServlet {
 			
 			data = AppController.getPollDataOnCheck(TestIpClass.TEST_IP);
 			
-			request.getSession(false).setAttribute("votedAnonymous", data.showVotes); // referenced in votedServlet line: 40
-			
-			request.setAttribute("PollData", data);
-			
+			request.getSession().setAttribute("votedAnonymous", data.showVotes); // referenced in votedServlet line: 40
+			request.setAttribute("PollData", data);		
 		}catch(SQLException e) {
 			ErrorData error = new ErrorData(500,"internal server error","message: " + e);
 			request.setAttribute("Error", error);
 		}
 		
 		request.getRequestDispatcher("/index.jsp").forward(request,response);
+		
+		
 	}
 
 }
