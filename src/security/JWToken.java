@@ -4,7 +4,6 @@ import java.security.Key;
 import java.util.Date;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 
 // import org.apache.commons.codec.digest.DigestUtils;
@@ -48,19 +47,7 @@ public class JWToken {
 	}
 	
 	
-	public static boolean validateJWT(HttpServletRequest req, String key) {
-		
-		// get authorization header
-		String authHeader = req.getHeader("Authorization");
-		
-		// check if authentication header is null or does not start with Bearer
-		if (authHeader == null || !authHeader.startsWith("bearer ")) {
-			System.out.println("No token provided!");
-			return false;
-		}
-
-		// retrieve token after Bearer (7 chars inc. space)
-		String token = authHeader.substring(7);
+	public static boolean validateJWT(String token, String key) {
 		
 		// parse claims
 		try {

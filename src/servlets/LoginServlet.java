@@ -50,21 +50,23 @@ public class LoginServlet extends HttpServlet {
 				
 				// if valid issue new token -> key, issuer, subject, ttlMillis
 				String token = JWToken.issueJWT(ip, uname, pass, 1000 * 60 * 10);
+				System.out.println(token);
 				
-				// put token inside authentication header of response
-				response.setHeader("Authorization", "bearer " + token);
+				// put token inside sessionscope
 				
+				session.setAttribute("token", token);
 				session.setAttribute("loggedin", true);
 				session.setAttribute("user", uname);
 				
 				// send confirmation message
 				ConfirmData confirmation = new ConfirmData(200,"OK","login successful!");
 				
+				// remove any previous Error messages
+				session.removeAttribute("Error");
+				
 				// put confirmation as request attribute
-				request.setAttribute("ConfirmMsg", confirmation);
-				
-				// response.sendRedirect("/");
-				
+				session.setAttribute("ConfirmMsg", confirmation);
+					
 			}
 			else {
 				
@@ -72,10 +74,10 @@ public class LoginServlet extends HttpServlet {
 				ErrorData error = new ErrorData(401,"unauthorized","invalid login credentials!");
 				
 				// put error as request attribute
-				request.setAttribute("Error", error);
+				session.setAttribute("Error", error);
 				
 				session.setAttribute("loggedin", false);
-						
+							
 			}
 			
 		}
@@ -85,15 +87,15 @@ public class LoginServlet extends HttpServlet {
 			ErrorData error = new ErrorData(500,"internal server error", "message: " + e.getMessage());
 			
 			// put error as request attribute
-			request.setAttribute("Error", error);
-			
+			session.setAttribute("Error", error);
 			session.setAttribute("loggedin", false);
 				
 		}
 		
 		
 		// dispatch request to index.jsp
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		// request.getRequestDispatcher("/index.jsp").forward(request, response);
+		response.sendRedirect("./");
 			
 	}
 }
