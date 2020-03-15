@@ -45,15 +45,15 @@
 				</c:if>
 
 				<!-- poll display, data could be string or could be PollData -->
-				<c:set var="data" value="${PollData.data}"/>
+				<c:set var="data" value="${PollData.data}" />
 				<c:choose>
 					<c:when test="${data eq 'none'}">
 						<p>There are no questions left, stay tuned!</p>
 					</c:when>
 					<c:otherwise>
 						<!-- polldata is data -->
-						<div>
-							<p class="title">${data.description}</p>
+						<div class="poll-container">
+							<p>${data.description}</p>
 							<form id="vote-form" method="POST" action="./vote">
 								<div>
 									<input type="hidden" name="qid" value="${data.qid}">
@@ -71,28 +71,30 @@
 										</c:if>
 									</div>
 								</c:forEach>
-								<c:if test="${data.loginRequiredToVote eq true or data.showVotes eq true}">
-									<button type="submit" class="" disabled>Vote</button>
-								</c:if>
-								<c:if test="${data.loginRequiredToVote eq false and data.showVotes eq false}">
-									<button type="submit" class="" onclick="submitVote()">Vote</button>
-								</c:if>
+								<div class="button-panel">
+									<c:if test="${data.loginRequiredToVote eq true or data.showVotes eq true}">
+										<button type="submit" disabled>Vote</button>
+									</c:if>
+									<c:if test="${data.loginRequiredToVote eq false and data.showVotes eq false}">
+										<button type="submit" onclick="submitVote()">Vote</button>
+									</c:if>
+									<div>
+										<c:if test="${data.showVotes eq false and data.loginRequiredToVote eq false and empty loggedin }">
+											<p>You are about to vote as anonymous, remember this is the only vote allowed from this machine
+											</p>
+										</c:if>
+										<c:if test="${data.showVotes eq true}">
+											<p>You allready casted an anonymous vote for this question, please login or register to continue
+											</p>
+										</c:if>
+										<c:if test="${data.loginRequiredToVote eq true}">
+											<p>You must be loggedin to vote</p>
+										</c:if>
+									</div>
+								</div>
 							</form>
 						</div>
 
-						
-							<div>
-								<c:if test="${data.showVotes eq false and data.loginRequiredToVote eq false and empty loggedin }">
-									<p>You are about to vote as anonymous, remember this is the only vote allowed from this machine</p>
-								</c:if>
-								<c:if test="${data.showVotes eq true}">
-									<p>You allready casted an anonymous vote for this question, please login or register to continue</p>
-								</c:if>
-								<c:if test="${data.loginRequiredToVote eq true}">
-									<p>You must be loggedin to vote</p>
-								</c:if>
-							</div>
-						
 					</c:otherwise>
 				</c:choose>
 

@@ -1,6 +1,65 @@
-.poll-answer{
+.poll-answer {
   display: flex;
+  justify-content: space-evenly;
+  padding-top:10px;
+  padding-bottom: 10px;
+  padding-left: 1px;
+  padding-right: 1px;
+  font-size: 18px;
+}
+
+meter {
+  width: 60%;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+
+.poll-container {
+
+  border: 1px solid black;
+  background-image: linear-gradient(to bottom right, hsl(0,0%,98%), hsl(0,0%,88%));
+  border-radius: 20px;
+  padding: 10px;
+  width: 50%;
+}
+
+.poll-container > p {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px;
+}
+
+.poll-container > form {
+  display: block;
+}
+
+.button-panel{
+  display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
-  padding: 20px;
-  
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.button-panel > button {
+  background-color: #4CAF50;
+  margin-top: 15px;
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+}
+
+.button-panel > button:disabled {
+  background-color: hsl(0, 0%, 90%);
+  border: 1px solid black;
+  color: black;
 }
