@@ -1,33 +1,64 @@
+section{
+	padding: 20px;
+}
 .poll-answer {
   display: flex;
-  justify-content: space-evenly;
-  padding-top:10px;
-  padding-bottom: 10px;
-  padding-left: 1px;
-  padding-right: 1px;
+  align-items: center;
+  justify-content: space-around;
+  padding-top:12px;
+  padding-bottom: 12px;
   font-size: 18px;
+  border: 1px solid grey;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 6px 0 rgba(0, 0, 0, 0.19);
+}
+
+.poll-answer > span{
+  background-color: transparent;
+  padding: 10px;
+  width: 5em;
+}
+
+input[type="radio"]{
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 meter {
-  width: 60%;
-  height: 25px;
-  border: 1px solid black;
+  width: 70%;
+  height: 30px;
+  background-color: whitesmoke;
+}
+
+meter::-webkit-meter-bar{
+  background: #EEE;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
   border-radius: 3px;
 }
 
+meter::-webkit-meter-optimum-value {
+  box-shadow: 0 5px 5px -5px #999 inset;
+  background-image: linear-gradient(to right, hsl(120,100%,30%), hsl(120,100%,35%));
+  background-size: 100% 100%;
+}
 
 .poll-container {
-
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 18px 0 rgba(0, 0, 0, 0.19);
   background-image: linear-gradient(to bottom right, hsl(0,0%,98%), hsl(0,0%,88%));
-  border-radius: 20px;
-  padding: 10px;
-  width: 50%;
+  border-radius: 12px;
+  width:100%;
+  padding: 20px;
 }
 
 .poll-container > p {
   display: block;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
   padding: 15px;
 }
@@ -36,30 +67,48 @@ meter {
   display: block;
 }
 
-.button-panel{
+.poll-notification{
+  padding: 10px;
+}
+
+.poll-footer{
   display: flex;
-  flex-direction: column-reverse;
   justify-content: space-between;
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 15px;
+  word-spacing: 5px;
+  padding: 10px;
+}
+
+.button-panel{
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 6px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  justify-content: center;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
 }
 
 .button-panel > button {
+  display: block;
+  width: 80%;
   background-color: #4CAF50;
-  margin-top: 15px;
-  border: none;
+  border: 1px solid darkslategrey;
   color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 18px 0 rgba(0, 0, 0, 0.19);
   padding: 10px 24px;
   border-radius: 6px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 18px;
 }
 
 .button-panel > button:disabled {
   background-color: hsl(0, 0%, 90%);
-  border: 1px solid black;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset;
+  border: 1px solid grey;
   color: black;
+}
+
+.button-panel > button:hover{
+  background-color: darkseagreen
 }
