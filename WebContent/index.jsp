@@ -6,26 +6,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>index</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-<link rel="stylesheet" href="css/styling.css">
-<link rel="stylesheet" href="css/loginRegister.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/register.css">
 
 <script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
-	<section>
-		<jsp:include page="voting.jsp" />
+<c:if test="${ empty CurrentView or CurrentView eq 'polldata' }">
+<section>
+		<jsp:include page="poll.jsp" />
 	</section>
+</c:if>
+	
+<c:if test="${not empty CurrentView and CurrentView eq 'login'}">
 	<section>
 		<jsp:include page="login.jsp" />
 	</section>
+</c:if>
+
+<c:if test="${ not empty CurrentView and CurrentView eq 'register' }">
 	<section>
 		<jsp:include page="register.jsp" />
 	</section>
-	<script src="js/vote.js"></script>
+</c:if>
+
 </body>
 
 </html>

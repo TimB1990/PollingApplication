@@ -1,4 +1,4 @@
-package pollDatabase;
+package utilities;
 
 import java.sql.Connection;
 import java.sql.SQLException;
