@@ -15,7 +15,7 @@ public class DBCPDataSource {
     	ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/polling?serverTimezone=UTC");
         ds.setUsername("root");
-        ds.setPassword("gtagpw7*////");
+        ds.setPassword("gtagpw7*////"); // ONLY FOR TESTING!!!
         ds.setMinIdle(5);
         ds.setMaxIdle(10);
         ds.setMaxOpenPreparedStatements(100);
