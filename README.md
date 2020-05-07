@@ -97,5 +97,5 @@ logboek programmeren 2
 28-04-2020: ontwikkeling v2 java 
 29-04-2020: ontwikkeling v2 java
 06-05-2020: ontwikkeling v2 java
-07-05-2020: afronding ontwikkeling v2 java en testrapport
+07-05-2020: afronding ontwikkeling v2 java en testplan
 ```
