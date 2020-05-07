@@ -49,7 +49,7 @@ When the client registres as user he is required to login afterwards. When logge
 ## time log
 On behalve of LOI a timelog of tasks (dutch)
 logboek programmeren 2
-<code>
+```bash
 6-1-2020: installatie beschrijving
 7-1-2020: algemene orientatie
 8-1-2020: orientatie op mogelijk gebruik spring mvc
@@ -98,4 +98,4 @@ logboek programmeren 2
 29-04-2020: ontwikkeling v2 java
 06-05-2020: ontwikkeling v2 java
 07-05-2020: afronding ontwikkeling v2 java en testrapport
-	</code>
+```
