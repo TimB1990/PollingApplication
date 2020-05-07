@@ -43,4 +43,4 @@ Notice that this part requires refactoring.
 ## Business Logic
 On startup this application retrieves a random poll when client is 'anonymous'. The client is then allowed to vote once.
 After the client voted anonymous its role will be changed to 'guest', this means that the application requires the client to register and user and will display the results of last answered question.
-When the client registres as user he must is required to login afterwards. When loggedin, The client is allowed to vote a random unanswered poll untill there are no polls left.
+When the client registres as user he is required to login afterwards. When logged in, The client is allowed to vote a random unanswered poll untill there are no polls left.
