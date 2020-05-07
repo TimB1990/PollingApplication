@@ -94,5 +94,11 @@
 			<artifactId>cxf-rt-rs-extension-providers</artifactId>
 			<version>3.3.5</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>jakarta.mail</artifactId>
+			<version>1.6.4</version>
+		</dependency>
 	</dependencies>
 </project>
