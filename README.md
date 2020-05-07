@@ -7,6 +7,7 @@ fictional
   <li> Open mysql CLI: <code>CREATE DATABASE polling_v2</code></li>
   <li> Import database.sql file using <code>mysql -u username -p polling_v2 < #\pollingApplication\database\v2\database.sql</code></li>
   <li> Open folder: <code>#\pollingApplication\database\database workspace</code> inside your IDE and copy/paste contents from grants.sql file into MySQL CLI </li>
+	<li> Open project in Eclipse IDE, right click 'PollingApplication' in Project Explorer, click 'Run As' > 'Run on Server' to deploy application to Tomcat</li>
 </ol>
 
 ## Testing
