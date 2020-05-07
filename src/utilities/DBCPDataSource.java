@@ -13,7 +13,7 @@ public class DBCPDataSource {
     static{
     	
     	ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/polling_v2?serverTimezone=UTC");
+        ds.setUrl("jdbc:mysql://localhost:3306/polling_v2?serverTimezone=GMT%2B8");
         ds.setUsername("guest");
         ds.setPassword("");
         ds.setMaxIdle(10);

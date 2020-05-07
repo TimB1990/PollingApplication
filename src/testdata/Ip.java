@@ -7,8 +7,13 @@ package testdata;
  * */
 public class Ip {
 	
-	// public static final String TEST_IP = "first.test.ip";
-	// public static final String TEST_IP = "second.test.ip";
-	public static final String TEST_IP = "third.test.ip";
+	/* predefined test ips */
+	
+	// public static final String TEST_IP = "anon.test.ip";
+	
+	// public static final String TEST_IP = "guest.test.ip";
+	
+	/*username: user, password: user*/
+	public static final String TEST_IP = "user.test.ip";
 
 }
